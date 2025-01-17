@@ -6,7 +6,7 @@ Model has been trained on Kaggle using the 16GB - T4 GPU. Maximum batch size tha
 ## Model Highlights
 - This GPT model has 12 transformer blocks
 - Total number of parameters in the model is 85.9 M
-- Encoder used here is a manually created text to char encoder
+- Tokenizer used here is a manually created text to char encoder
 - Vocab size is 65
 - In the self-attention block, masking is used to prevent the model from looking into the future tokens
 
