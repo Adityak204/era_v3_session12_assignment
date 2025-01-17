@@ -1,12 +1,15 @@
 # Shakespear - GPT
 This project contains a GPT-2 model trained on Julius Caesar Play written by Shakespear. GPT-2 is a transformer-based language model that can generate human-like text. The model architecture is heavily based on the Andrey Karpathy's video: "[Let's build GPT: from scratch, in code, spelled out.](https://www.youtube.com/watch?v=kCc8FmEb1nY&ab_channel=AndrejKarpathy)"
 
+Model has been trained on Kaggle using the 16GB - T4 GPU. Maximum batch size that can be used without getting OOM error was 4. The model has been trained for 60 epochs.
+
 ## Model Highlights
 - This GPT model has 12 transformer blocks
 - Total number of parameters in the model is 85.9 M
 - Encoder used here is a manually created text to char encoder
 - Vocab size is 65
 - In the self-attention block, masking is used to prevent the model from looking into the future tokens
+
 
 ## HuggingFace Space
 The model is available on HuggingFace space. You can access the model using the following link: [Julius-Caesar-Play-GPT]()
@@ -16,84 +19,85 @@ The model is available on HuggingFace space. You can access the model using the 
 ======================================================================================================================================================
 Layer (type (var_name))                            Input Shape               Output Shape              Param #                   Mult-Adds
 ======================================================================================================================================================
-GPT (GPT)                                          [64, 1024]                [64, 1024, 65]            --                        --
+GPT (GPT)                                          [4, 1024]                 [4, 1024, 65]             --                        --
 ├─ModuleDict (transformer)                         --                        --                        --                        --
-│    └─Embedding (wte)                             [64, 1024]                [64, 1024, 768]           49,920                    3,194,880
+│    └─Embedding (wte)                             [4, 1024]                 [4, 1024, 768]            49,920                    199,680
 │    └─Embedding (wpe)                             [1, 1024]                 [1, 1024, 768]            786,432                   786,432
-│    └─Dropout (drop)                              [64, 1024, 768]           [64, 1024, 768]           --                        --
+│    └─Dropout (drop)                              [4, 1024, 768]            [4, 1024, 768]            --                        --
 │    └─ModuleList (h)                              --                        --                        --                        --
-│    │    └─TransformerBlock (0)                   [64, 1024, 768]           [64, 1024, 768]           --                        --
-│    │    │    └─LayerNorm (ln_1)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─MultiHeadAttention (attn)         [64, 1024, 768]           [64, 1024, 768]           2,362,368                 151,191,552
-│    │    │    └─LayerNorm (ln_2)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─FeedForward (mlp)                 [64, 1024, 768]           [64, 1024, 768]           4,722,432                 302,235,648
-│    │    └─TransformerBlock (1)                   [64, 1024, 768]           [64, 1024, 768]           --                        --
-│    │    │    └─LayerNorm (ln_1)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─MultiHeadAttention (attn)         [64, 1024, 768]           [64, 1024, 768]           2,362,368                 151,191,552
-│    │    │    └─LayerNorm (ln_2)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─FeedForward (mlp)                 [64, 1024, 768]           [64, 1024, 768]           4,722,432                 302,235,648
-│    │    └─TransformerBlock (2)                   [64, 1024, 768]           [64, 1024, 768]           --                        --
-│    │    │    └─LayerNorm (ln_1)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─MultiHeadAttention (attn)         [64, 1024, 768]           [64, 1024, 768]           2,362,368                 151,191,552
-│    │    │    └─LayerNorm (ln_2)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─FeedForward (mlp)                 [64, 1024, 768]           [64, 1024, 768]           4,722,432                 302,235,648
-│    │    └─TransformerBlock (3)                   [64, 1024, 768]           [64, 1024, 768]           --                        --
-│    │    │    └─LayerNorm (ln_1)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─MultiHeadAttention (attn)         [64, 1024, 768]           [64, 1024, 768]           2,362,368                 151,191,552
-│    │    │    └─LayerNorm (ln_2)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─FeedForward (mlp)                 [64, 1024, 768]           [64, 1024, 768]           4,722,432                 302,235,648
-│    │    └─TransformerBlock (4)                   [64, 1024, 768]           [64, 1024, 768]           --                        --
-│    │    │    └─LayerNorm (ln_1)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─MultiHeadAttention (attn)         [64, 1024, 768]           [64, 1024, 768]           2,362,368                 151,191,552
-│    │    │    └─LayerNorm (ln_2)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─FeedForward (mlp)                 [64, 1024, 768]           [64, 1024, 768]           4,722,432                 302,235,648
-│    │    └─TransformerBlock (5)                   [64, 1024, 768]           [64, 1024, 768]           --                        --
-│    │    │    └─LayerNorm (ln_1)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─MultiHeadAttention (attn)         [64, 1024, 768]           [64, 1024, 768]           2,362,368                 151,191,552
-│    │    │    └─LayerNorm (ln_2)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─FeedForward (mlp)                 [64, 1024, 768]           [64, 1024, 768]           4,722,432                 302,235,648
-│    │    └─TransformerBlock (6)                   [64, 1024, 768]           [64, 1024, 768]           --                        --
-│    │    │    └─LayerNorm (ln_1)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─MultiHeadAttention (attn)         [64, 1024, 768]           [64, 1024, 768]           2,362,368                 151,191,552
-│    │    │    └─LayerNorm (ln_2)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─FeedForward (mlp)                 [64, 1024, 768]           [64, 1024, 768]           4,722,432                 302,235,648
-│    │    └─TransformerBlock (7)                   [64, 1024, 768]           [64, 1024, 768]           --                        --
-│    │    │    └─LayerNorm (ln_1)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─MultiHeadAttention (attn)         [64, 1024, 768]           [64, 1024, 768]           2,362,368                 151,191,552
-│    │    │    └─LayerNorm (ln_2)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─FeedForward (mlp)                 [64, 1024, 768]           [64, 1024, 768]           4,722,432                 302,235,648
-│    │    └─TransformerBlock (8)                   [64, 1024, 768]           [64, 1024, 768]           --                        --
-│    │    │    └─LayerNorm (ln_1)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─MultiHeadAttention (attn)         [64, 1024, 768]           [64, 1024, 768]           2,362,368                 151,191,552
-│    │    │    └─LayerNorm (ln_2)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─FeedForward (mlp)                 [64, 1024, 768]           [64, 1024, 768]           4,722,432                 302,235,648
-│    │    └─TransformerBlock (9)                   [64, 1024, 768]           [64, 1024, 768]           --                        --
-│    │    │    └─LayerNorm (ln_1)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─MultiHeadAttention (attn)         [64, 1024, 768]           [64, 1024, 768]           2,362,368                 151,191,552
-│    │    │    └─LayerNorm (ln_2)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─FeedForward (mlp)                 [64, 1024, 768]           [64, 1024, 768]           4,722,432                 302,235,648
-│    │    └─TransformerBlock (10)                  [64, 1024, 768]           [64, 1024, 768]           --                        --
-│    │    │    └─LayerNorm (ln_1)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─MultiHeadAttention (attn)         [64, 1024, 768]           [64, 1024, 768]           2,362,368                 151,191,552
-│    │    │    └─LayerNorm (ln_2)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─FeedForward (mlp)                 [64, 1024, 768]           [64, 1024, 768]           4,722,432                 302,235,648
-│    │    └─TransformerBlock (11)                  [64, 1024, 768]           [64, 1024, 768]           --                        --
-│    │    │    └─LayerNorm (ln_1)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─MultiHeadAttention (attn)         [64, 1024, 768]           [64, 1024, 768]           2,362,368                 151,191,552
-│    │    │    └─LayerNorm (ln_2)                  [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-│    │    │    └─FeedForward (mlp)                 [64, 1024, 768]           [64, 1024, 768]           4,722,432                 302,235,648
-│    └─LayerNorm (ln_f)                            [64, 1024, 768]           [64, 1024, 768]           1,536                     98,304
-├─Linear (lm_head)                                 [64, 1024, 768]           [64, 1024, 65]            49,920                    3,194,880
+│    │    └─TransformerBlock (0)                   [4, 1024, 768]            [4, 1024, 768]            --                        --
+│    │    │    └─LayerNorm (ln_1)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─MultiHeadAttention (attn)         [4, 1024, 768]            [4, 1024, 768]            2,362,368                 9,449,472
+│    │    │    └─LayerNorm (ln_2)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─FeedForward (mlp)                 [4, 1024, 768]            [4, 1024, 768]            4,722,432                 18,889,728
+│    │    └─TransformerBlock (1)                   [4, 1024, 768]            [4, 1024, 768]            --                        --
+│    │    │    └─LayerNorm (ln_1)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─MultiHeadAttention (attn)         [4, 1024, 768]            [4, 1024, 768]            2,362,368                 9,449,472
+│    │    │    └─LayerNorm (ln_2)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─FeedForward (mlp)                 [4, 1024, 768]            [4, 1024, 768]            4,722,432                 18,889,728
+│    │    └─TransformerBlock (2)                   [4, 1024, 768]            [4, 1024, 768]            --                        --
+│    │    │    └─LayerNorm (ln_1)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─MultiHeadAttention (attn)         [4, 1024, 768]            [4, 1024, 768]            2,362,368                 9,449,472
+│    │    │    └─LayerNorm (ln_2)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─FeedForward (mlp)                 [4, 1024, 768]            [4, 1024, 768]            4,722,432                 18,889,728
+│    │    └─TransformerBlock (3)                   [4, 1024, 768]            [4, 1024, 768]            --                        --
+│    │    │    └─LayerNorm (ln_1)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─MultiHeadAttention (attn)         [4, 1024, 768]            [4, 1024, 768]            2,362,368                 9,449,472
+│    │    │    └─LayerNorm (ln_2)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─FeedForward (mlp)                 [4, 1024, 768]            [4, 1024, 768]            4,722,432                 18,889,728
+│    │    └─TransformerBlock (4)                   [4, 1024, 768]            [4, 1024, 768]            --                        --
+│    │    │    └─LayerNorm (ln_1)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─MultiHeadAttention (attn)         [4, 1024, 768]            [4, 1024, 768]            2,362,368                 9,449,472
+│    │    │    └─LayerNorm (ln_2)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─FeedForward (mlp)                 [4, 1024, 768]            [4, 1024, 768]            4,722,432                 18,889,728
+│    │    └─TransformerBlock (5)                   [4, 1024, 768]            [4, 1024, 768]            --                        --
+│    │    │    └─LayerNorm (ln_1)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─MultiHeadAttention (attn)         [4, 1024, 768]            [4, 1024, 768]            2,362,368                 9,449,472
+│    │    │    └─LayerNorm (ln_2)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─FeedForward (mlp)                 [4, 1024, 768]            [4, 1024, 768]            4,722,432                 18,889,728
+│    │    └─TransformerBlock (6)                   [4, 1024, 768]            [4, 1024, 768]            --                        --
+│    │    │    └─LayerNorm (ln_1)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─MultiHeadAttention (attn)         [4, 1024, 768]            [4, 1024, 768]            2,362,368                 9,449,472
+│    │    │    └─LayerNorm (ln_2)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─FeedForward (mlp)                 [4, 1024, 768]            [4, 1024, 768]            4,722,432                 18,889,728
+│    │    └─TransformerBlock (7)                   [4, 1024, 768]            [4, 1024, 768]            --                        --
+│    │    │    └─LayerNorm (ln_1)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─MultiHeadAttention (attn)         [4, 1024, 768]            [4, 1024, 768]            2,362,368                 9,449,472
+│    │    │    └─LayerNorm (ln_2)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─FeedForward (mlp)                 [4, 1024, 768]            [4, 1024, 768]            4,722,432                 18,889,728
+│    │    └─TransformerBlock (8)                   [4, 1024, 768]            [4, 1024, 768]            --                        --
+│    │    │    └─LayerNorm (ln_1)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─MultiHeadAttention (attn)         [4, 1024, 768]            [4, 1024, 768]            2,362,368                 9,449,472
+│    │    │    └─LayerNorm (ln_2)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─FeedForward (mlp)                 [4, 1024, 768]            [4, 1024, 768]            4,722,432                 18,889,728
+│    │    └─TransformerBlock (9)                   [4, 1024, 768]            [4, 1024, 768]            --                        --
+│    │    │    └─LayerNorm (ln_1)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─MultiHeadAttention (attn)         [4, 1024, 768]            [4, 1024, 768]            2,362,368                 9,449,472
+│    │    │    └─LayerNorm (ln_2)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─FeedForward (mlp)                 [4, 1024, 768]            [4, 1024, 768]            4,722,432                 18,889,728
+│    │    └─TransformerBlock (10)                  [4, 1024, 768]            [4, 1024, 768]            --                        --
+│    │    │    └─LayerNorm (ln_1)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─MultiHeadAttention (attn)         [4, 1024, 768]            [4, 1024, 768]            2,362,368                 9,449,472
+│    │    │    └─LayerNorm (ln_2)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─FeedForward (mlp)                 [4, 1024, 768]            [4, 1024, 768]            4,722,432                 18,889,728
+│    │    └─TransformerBlock (11)                  [4, 1024, 768]            [4, 1024, 768]            --                        --
+│    │    │    └─LayerNorm (ln_1)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─MultiHeadAttention (attn)         [4, 1024, 768]            [4, 1024, 768]            2,362,368                 9,449,472
+│    │    │    └─LayerNorm (ln_2)                  [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+│    │    │    └─FeedForward (mlp)                 [4, 1024, 768]            [4, 1024, 768]            4,722,432                 18,889,728
+│    └─LayerNorm (ln_f)                            [4, 1024, 768]            [4, 1024, 768]            1,536                     6,144
+├─Linear (lm_head)                                 [4, 1024, 768]            [4, 1024, 65]             49,920                    199,680
 ======================================================================================================================================================
 Total params: 85,942,272
 Trainable params: 85,942,272
 Non-trainable params: 0
-Total mult-adds (G): 5.45
+Total mult-adds (M): 341.41
 ======================================================================================================================================================
-Input size (MB): 0.52
-Forward/backward pass size (MB): 53995.90
+Input size (MB): 0.03
+Forward/backward pass size (MB): 3380.64
 Params size (MB): 343.77
-Estimated Total Size (MB): 54340.19
+Estimated Total Size (MB): 3724.44
+======================================================================================================================================================
 ```
 
 ## Training Logs
