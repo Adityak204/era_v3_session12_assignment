@@ -1,5 +1,5 @@
 # Shakespear - GPT
-This project contains a GPT-2 model trained on Julius Caesar Play written by Shakespear. GPT-2 is a transformer-based language model that can generate human-like text. The model architecture is heavily based on the Andrey Karpathy's video: "Let's build GPT: from scratch, in code, spelled out."
+This project contains a GPT-2 model trained on Julius Caesar Play written by Shakespear. GPT-2 is a transformer-based language model that can generate human-like text. The model architecture is heavily based on the Andrey Karpathy's video: "[Let's build GPT: from scratch, in code, spelled out.](https://www.youtube.com/watch?v=kCc8FmEb1nY&ab_channel=AndrejKarpathy)"
 
 ## Model Highlights
 - This GPT model has 12 transformer blocks
